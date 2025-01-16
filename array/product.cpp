@@ -302,6 +302,21 @@ int main()
                     cout<<"Adding product successfully...!"<<endl;
                 }
             }break;
+            case 9:{
+                double total_pay;
+                for(i=0;i<n;i++)
+                {
+                    total_pay += payment[i];
+                }
+                cout<<"__________________________________"<<endl;
+                cout<<"Total Payment : "<<total_pay<<" $"<<endl;
+                cout<<"          Thank You"<<endl;
+            }break;
+            case 10:{
+                return 0;
+                // exit(0);
+            }break;
+            default: cout<<"Invalid option "<<endl;
         }
     }while(op!=0);
     return 0;
