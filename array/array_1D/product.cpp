@@ -306,7 +306,8 @@ int main()
                 double total_pay;
                 for(i=0;i<n;i++)
                 {
-                    total_pay += payment[i];
+                    // total_pay = total_pay + total[i];
+                    total_pay += total[i];
                 }
                 cout<<"__________________________________"<<endl;
                 cout<<"Total Payment : "<<total_pay<<" $"<<endl;
