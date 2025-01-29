@@ -1,114 +1,142 @@
 #include <iostream>
-#include <iomanip>
-#include <regex>
+#include <vector>
 #include <string>
 using namespace std;
 
-// global variables
-int id_movie[50][50] = {
-    {1001,1002,1003,1004,1005}
+struct Movie {
+    int id;
+    string title;
+    string release;
+    string format;
+    float price;
+    string time;
+    string category;
 };
-string title[50][50] = {{"title1", "title2", "title3", "title4", "title5"}};
-string release[50][50] = {{"27/1/2025", "27/1/2025", "27/1/2025", "27/1/2025","27/1/2025"}};
-string two_d[50][50] = {{"2D", "2D", "2D", "2D", "2D"}};
-string three_d[50][50] = {{"3D", "3D", "3D", "3d", "3d"}};
-double price_2d[50][50]= {{4.5,5,6.5,7.5,8.5,9.5}};
-double price_3d[50][50]= {{6.5,7.5,8.5,9.5,10.5,11.5}};
-int h[50][50]= {{1,2,3,4,5,6,7}};
-int m[50][50]= {{25,55,44,30,50}};
-int s[50][50] = {{1,2,3,4,5,6,7}};
-int seat[50][50] = {
-    {1,2,3,4,5,6,7,8,9},
-    {13,14,15,16,17,18,19,20,21},
-    {25,26,27,28,29,30,31,32,33},
-    {35,36,37,38,39,40,41,42,43},
-    {45,46,47,48,49,50,51,52,53},
-    {55,56,57,58,59,60,61,62,63},
-    {65,66,67,68,69,70,71,72,73},
-    {75,76,77,78,79,80,81,82,83},
-    };
-int i,j,n;
-int row,column;
-void AddMovie()
-{
-    cout<<"Enter ID : ";cin>>id_movie[i][j];
-    cout<<"Enter Title : ";cin>>title[i][j];
-    cout<<"Enter Release Date : ";cin>>release[i][j];
-    cout<<"Enter Type (2D/3D) : ";cin>>two_d[i][j];
-    cout<<"Enter Price (2D) : ";cin>>price_2d[i][j];
-    cout<<"Enter Price (3D) : ";cin>>price_3d[i][j];
-    cout<<"Enter Hours : ";cin>>h[i][j];
-    cout<<"Enter Minutes : ";cin>>m[i][j];
-    cout<<"Enter Seconds : ";cin>>s[i][j];
-}
-void Header()
-{
-    cout<<setw(5)<<"ID"
-    <<setw(20)<<"Title"
-    <<setw(20)<<"Release Date"
-    <<setw(10)<<"Type 2D"
-    <<setw(10)<<"Type 3D"
-    <<setw(10)<<"Price (2D)"
-    <<setw(10)<<"Price (3D)"
-    <<setw(10)<<"Duration"
-    <<endl;
-}
-void Display(){
-    cout<<setw(5)<<id_movie[i][j]
-    <<setw(20)<<title[i][j]
-    <<setw(20)<<release[i][j]
-    <<setw(10)<<two_d[i][j]
-    <<setw(10)<<three_d[i][j]
-    <<setw(10)<<price_2d[i][j]
-    <<setw(10)<<price_3d[i][j]
-    <<setw(10)<<h[i][j]<<":"<<m[i][j]<<":"<<s[i][j]<<endl;
-}
-int main()
-{
-    int op;
-    do{
-        cout<<"=============[MENU MOVIE]========================="<<endl;
-        cout<<"[1. Add Movie]"<<endl;
-        cout<<"[2. Display]"<<endl;
-        cout<<"[3. Check Seat]"<<endl;
-        cout<<"Enter your choice : ";cin>>op;
-        switch(op)
-        {
-            case 1:{
-                row = i/50;
-                column = i%50;
-                AddMovie();
-                i++;
-            }break;
-            case 2:{
-                Header();
-                for(i=0; i<n; i++){
-                    row = i/50;
-                    column = i%50;
-                    Display();
-                }
-            }break;
-            case 3:{
-                for(i=0; i<8; i++)
-                {
-                    cout<<endl;
-                    for(j=0;j<9;j++)
-                    {
-                        cout<<setw(3)<<seat[i][j]<<"   ";
-                    }
-                }
-                cout<<endl;
-                cout<<"Enter Row    : ";cin>>row;
-                cout<<"Enter Column : ";cin>>column;
-                row = row-1;
-                column = column-1;
-                if(seat[i][j] == 0){
-                    cout<<"Seat is Available"<<endl;
-                }else{
-                    cout<<"Seat is Occupied"<<endl;
-                }
-            }
+
+const int ROWS = 10;
+const int COLUMNS = 10;
+char seats[ROWS][COLUMNS];
+
+struct Ticket {
+    int movieId;
+    string movieTitle;
+    char row;
+    int seat;
+    int hall;
+    float price;
+    string type; // VIP or Normal
+};
+
+vector<Movie> movies;
+vector<Ticket> tickets;
+
+void initializeSeats() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++) {
+            seats[i][j] = 'O'; // O for open seat
         }
-    }while(op!=0);
+    }
+}
+
+void displaySeats() {
+    cout << "\nSeat Availability:\n";
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLUMNS; j++) {
+            cout << seats[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void insertMovie() {
+    Movie movie;
+    cout << "Enter movie ID: ";cin >> movie.id;
+    cout << "Enter title: ";cin.ignore();getline(cin, movie.title);
+    cout << "Enter release date: ";getline(cin, movie.release);
+    cout << "Enter format (2D/3D): ";getline(cin, movie.format);
+    cout << "Enter price: ";cin >> movie.price;
+    cout << "Enter time: ";cin.ignore();getline(cin, movie.time);
+    cout << "Enter category: ";getline(cin, movie.category);
+    movies.push_back(movie);cout << "Movie added successfully!\n";
+}
+
+void checkMovies() {
+    cout << "Available Movies:\n";
+    for (const auto &movie : movies) {
+        cout << "ID: " << movie.id << ", Title: " << movie.title << "\n";
+    }
+}
+void bookTicket() {
+    int movieId;
+    cout << "Enter movie ID to book: ";
+    cin >> movieId;
+    
+    for (const auto &movie : movies) {
+        if (movie.id == movieId) {
+            Ticket ticket;
+            ticket.movieId = movie.id;
+            ticket.movieTitle = movie.title;
+            cout << "Enter row (0-9): ";int row;cin >> row;
+            cout << "Enter seat number (0-9): ";int column;cin >> column;
+            if (row >= 0 && row < ROWS && column >= 0 && column < COLUMNS && seats[row][column] == 'O') {
+                seats[row][column] = 'X'; // X for booked seat
+                ticket.row = 'A' + row;
+                ticket.seat = column + 1;
+                cout << "Enter hall number: ";
+                cin >> ticket.hall;
+                cout << "Enter seat type (VIP/Normal): ";
+                cin >> ticket.type;
+                ticket.price = movie.price;
+                tickets.push_back(ticket);
+                cout << "Ticket booked successfully!\n";
+            } else {
+                cout << "Seat not available!\n";
+            }
+            return;
+        }
+    }
+    cout << "Movie ID not found.\n";
+}
+
+void checkTickets() {
+    cout << "Booked Tickets:\n";
+    for (const auto &ticket : tickets) {
+        cout << "Movie: " << ticket.movieTitle << ", Row: " << ticket.row << ", Seat: " << ticket.seat << ", Hall: " << ticket.hall << ", Type: " << ticket.type << "\n";
+    }
+}
+
+void checkSeats() {
+    displaySeats();
+}
+
+int main() {
+    initializeSeats();
+    int choice;
+    do {
+        cout << "\n1. Insert Movie\n2. Check & Book Movie\n3. Check Ticket\n4. Check Seat\n5. Exit\nEnter choice: ";
+        cin >> choice;
+        
+        switch (choice) {
+            case 1:
+                insertMovie();
+                break;
+            case 2:
+                checkMovies();
+                bookTicket();
+                break;
+            case 3:
+                checkTickets();
+                break;
+            case 4:
+                checkSeats();
+                break;
+            case 5:
+                cout << "Exiting...\n";
+                break;
+            default:
+                cout << "Invalid choice!\n";
+        }
+    } while (choice != 5);
+    
     return 0;
 }
