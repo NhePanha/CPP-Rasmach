@@ -47,7 +47,6 @@ void displaySeats() {
         cout << endl;
     }
 }
-
 void insertMovie() {
     Movie movie;
     cout << "Enter movie ID: ";cin >> movie.id;
@@ -137,6 +136,5 @@ int main() {
                 cout << "Invalid choice!\n";
         }
     } while (choice != 5);
-    
     return 0;
 }
