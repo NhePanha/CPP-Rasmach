@@ -10,12 +10,12 @@ struct Person{
 }per; // global object of structure
 void addPerson()
 {
-    cout<<"Enter Person ID : ";cin>>per.id;
+    cout<<"Enter Person ID   : ";cin>>per.id;
     cout<<"Enter Person Name : ";cin.ignore();getline(cin,per.name);
-    cout<<"Enter Person Age : ";cin>>per.age;
+    cout<<"Enter Person Age  : ";cin>>per.age;
     cout<<"Enter Person Gender (Male/Female) : ";cin>>per.gender;
-    cout<<"Enter Person Height (in meters) : ";cin>>per.height;
-    cout<<"Enter Person Weight (in kg) : ";cin>>per.weight;
+    cout<<"Enter Person Height (in meters)   : ";cin>>per.height;
+    cout<<"Enter Person Weight (in kg)       : ";cin>>per.weight;
 }
 
 void DisplayPerson()
