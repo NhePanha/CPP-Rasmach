@@ -24,16 +24,16 @@ struct Ticket {
     int seat;
     int hall;
     float price;
-    string type; // VIP or Normal
+    string type; // VIP or Normal 
 };
-
+// colections
 vector<Movie> movies;
 vector<Ticket> tickets;
 
 void initializeSeats() {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLUMNS; j++) {
-            seats[i][j] = 'O'; // O for open seat
+            seats[i][j] = '\3'; // O for open seat
         }
     }
 }
@@ -78,7 +78,7 @@ void bookTicket() {
             cout << "Enter row (0-9): ";int row;cin >> row;
             cout << "Enter seat number (0-9): ";int column;cin >> column;
             if (row >= 0 && row < ROWS && column >= 0 && column < COLUMNS && seats[row][column] == 'O') {
-                seats[row][column] = 'X'; // X for booked seat
+                seats[row][column] = '\3'; // X for booked seat
                 ticket.row = 'A' + row;
                 ticket.seat = column + 1;
                 cout << "Enter hall number: ";
