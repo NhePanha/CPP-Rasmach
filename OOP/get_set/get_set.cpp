@@ -38,16 +38,25 @@ int main()
 {
     // create object of Product class
     Product pro;
+    int id;
+    string name;
+    double qty, price;
+    cout<<"Enter Product ID       : ";cin>>id;
+    cout<<"Enter Product Name     : ";cin>>name;
+    cout<<"Enter Product Quantity : ";cin>>qty;
+    cout<<"Enter Product Price    : ";cin>>price;
     // access member functions
-    pro.setId(101);  // object.properties(parameters)
-    pro.setName("Apple");
-    pro.setQuantity(5);
-    pro.setPrice(1.5);
+    pro.setId(id);  // object.properties(parameters)
+    pro.setName(name);
+    pro.setQuantity(qty);
+    pro.setPrice(price);
 
     // display data
-    cout<<"ID: "<<pro.getId()<<endl;
-    cout<<"Name: "<<pro.getName()<<endl;
-    cout<<"Quantity: "<<pro.getQuantity()<<endl;
-    cout<<"Price: "<<pro.getPrice()<<endl;
+    cout<<"__________________________________"<<endl;
+    cout<<"ID       : "<<pro.getId()<<endl;
+    cout<<"Name     : "<<pro.getName()<<endl;
+    cout<<"Quantity : "<<pro.getQuantity()<<endl;
+    cout<<"Price    : "<<pro.getPrice()<<endl;
+    cout<<"__________________________________"<<endl;
     return 0;
 }
