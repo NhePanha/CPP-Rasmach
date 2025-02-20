@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <iomanip>
 using namespace std;
 class Person{
@@ -16,8 +17,8 @@ class Person{
             weight = 0.0;
         }
         void Input(){
-            cout<<"Enter ID      : ";cin>>id;
-            cout<<"Enter Name    : ";cin>>name;
+            cout<<"Enter ID      : "<<id;
+            cout<<"Enter Name    : "<<name;
             cout<<"Enter Gender  : ";cin>>gender;
             cout<<"Enter Height  : ";cin>>height;
             cout<<"Enter Weight  : ";cin>>weight;
@@ -72,7 +73,7 @@ void Header()
 }
 int main(){
     Student stu;
-    // stu.Input();
+    stu.Input();
     Header();
     stu.Output();
 }
