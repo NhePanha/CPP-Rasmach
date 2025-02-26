@@ -3,12 +3,18 @@
 #include <vector>
 #include <string.h>
 using namespace std;
+// class 
 class Person{
     protected:
         int id;
         string name;
         string gender;
     public:
+    // for search values
+        int getID()
+        {
+            return id;
+        }
         void Input()
         {
             cout<<"Enter ID     : ";cin>>id;
@@ -119,18 +125,105 @@ class Student:public DateTime{
             cout<<"------------------------------------------------------------------------------------------------------------"<<endl;
         }
 };
-
+// class
+//--------------------------
+// functions search
+void SearchEmployee(vector<Employee> employee)
+{
+    int id;
+    cout<<"Enter Employee ID : ";cin>>id;
+    for(auto &e :employee)
+    {
+        if(e.getID()==id){
+            e.Output();
+            return;
+        }
+    }
+}
+// functions
 int main()
 {
-    Employee employee;
-    Student student;
-
-    employee.Input();
-    employee.EmpHeader();
-    employee.Output();
-
-    student.Input();
-    student.StuHeader();
-    student.Ouptut();
+    int op;
+    do{
+        cout<<"====================================================="<<endl;
+        cout<<"\t\t[1 E M P L O Y E E      ]"<<endl;
+        cout<<"\t\t[2 S T U D E N T S      ]"<<endl;
+        cout<<"======================================================"<<endl;
+        cout<<"Enter Your Choice : ";cin>>op;
+        switch(op){
+            case 1:{
+                Employee emp;
+                vector<Employee> employees;
+                int op;
+                do{
+                    cout<<"==============[ E M P L O Y E E ]================="<<endl;
+                    cout<<"[1 ADD EMPLOYEE       ]"<<endl;
+                    cout<<"[2 DISPLAY EMPLOYEE   ]"<<endl;
+                    cout<<"[3 SEARCH EMPLOYEE    ]"<<endl;
+                    cout<<"[4 DELETE EMPLOYEE    ]"<<endl;
+                    cout<<"[5 UPDATE EMPLOYEE    ]"<<endl;
+                    cout<<"[6 INSERT EMPLOYEE    ]"<<endl;
+                    cout<<"[7 ADD EMPLOYEE       ]"<<endl;
+                    cout<<"================================================"<<endl;
+                    cout<<"Enter Your Choice : ";cin>>op;
+                    switch(op){
+                        case 1:{
+                            int n;
+                            cout<<"Enter Number of Employees : ";cin>>n;
+                            for(int i=0;i<n;i++){
+                                Employee emp;
+                                emp.Input();
+                                employees.push_back(emp);
+                            }
+                        }break;
+                        case 2:{
+                            emp.EmpHeader();
+                            for(auto &emp:employees){
+                                emp.Output();
+                            }
+                        }break;
+                        case 3:{
+                            SearchEmployee(employees,emp.EmpHeader());
+                        }break;
+                    }
+                }while(op!=0);
+            }break;
+            case 2:{
+                Student stu;
+                vector<Student> students;
+                int op;
+                do{
+                    cout<<"==============[ S T U D E N T S ]================="<<endl;
+                    cout<<"[1 ADD EMPLOYEE       ]"<<endl;
+                    cout<<"[2 DISPLAY EMPLOYEE   ]"<<endl;
+                    cout<<"[3 SEARCH EMPLOYEE    ]"<<endl;
+                    cout<<"[4 DELETE EMPLOYEE    ]"<<endl;
+                    cout<<"[5 UPDATE EMPLOYEE    ]"<<endl;
+                    cout<<"[6 INSERT EMPLOYEE    ]"<<endl;
+                    cout<<"[7 ADD EMPLOYEE       ]"<<endl;
+                    cout<<"================================================"<<endl;
+                    cout<<"Enter Your Choice : ";cin>>op;
+                    switch(op){
+                        case 1:{
+                            int n;
+                            cout<<"Enter Number of Students : ";cin>>n;
+                            for(int i=0; i<n; i++)
+                            {
+                                Student stu;
+                                stu.Input();
+                                students.push_back(stu);
+                            }
+                        }break;
+                        case 2:{
+                            stu.StuHeader();
+                            for(auto &s:students){
+                                s.Ouptut();
+                            }
+                        }break;
+                    }
+                }while(op!=0);
+            }
+        }
+    }while(op!=0);
     return 0;
 }
