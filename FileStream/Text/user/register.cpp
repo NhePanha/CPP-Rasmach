@@ -32,6 +32,7 @@ void SignUp(){
         cout<<RED<<"Passwords do not match!!"<<endl;
         return;
     }
+    // write to file
     storage<<username<<" "<<email<<" "<<password<<endl;
     storage.close();
     cout<<CYAN<<"Sign Up Successfully!"<<endl;
@@ -52,6 +53,7 @@ void SignIn(){
     cout<<BROWN<<"================================================"<<endl;
     cout<<"Email : "<<new_email<<endl;
     cout<<"Password : "<<new_password<<endl;
+    // read file 
     while(storage>>stored_username>>stored_email>>stored_password)
     {
         if(strcmp(stored_email,new_email)==0 && strcmp(stored_password,new_password)==0)
